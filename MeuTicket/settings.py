@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
    # 'demanda.middlewares.AllowIframeMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
 
@@ -128,9 +130,21 @@ STATIC_URL = 'static/'
 
 
 # Defina onde os arquivos estáticos estarão armazenados no projeto
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",  # Pasta global "static" no projeto
+# ]
+
+# Diretórios onde o Django vai procurar por arquivos estáticos
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Pasta global "static" no projeto
+    os.path.join(BASE_DIR, 'static'),  # Adicione o diretório onde seus arquivos CSS estão localizados
 ]
+
+
+
+
+
+
+
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
