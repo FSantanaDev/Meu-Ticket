@@ -1,7 +1,7 @@
 asgiref==3.8.1
 chardet==5.2.0
 Django==5.1.4
-gunicorn==
+gunicorn==23.0.0
 numpy==2.2.1
 packaging==24.2
 pandas==2.2.3
