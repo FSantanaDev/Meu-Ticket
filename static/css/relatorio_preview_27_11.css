@@ -1,0 +1,218 @@
+/* Reset de estilo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Barra de ferramentas fixa no topo */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Alterado para garantir que cubra toda a largura */
+  background-color: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 30px;
+}
+
+/* Adiciona um espaço no topo para evitar sobreposição com a barra de ferramentas */
+.report-container {
+  margin-top: 70px;
+}
+
+/* Container principal do relatório, com altura e largura padrão A4 */
+
+.report-container {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 40px auto;
+  padding: 5mm;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+} 
+
+/* Conteúdo principal do relatório */
+.report-content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0px;
+  margin-top: 1px;
+}
+
+/* Título do relatório e logo no cabeçalho */
+.header-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-top: 1px;
+  margin-top: -20px;
+}
+
+.header-text .logo {
+  margin-right: auto;
+}
+
+.header-text h1 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.8em;
+  color: #333;
+  margin: 0;
+}
+
+
+
+
+/* Parágrafo de informações dos filtros */
+.filters-info {
+  text-align: left;
+  font-size: 0.7em; /* Diminui o tamanho da fonte */
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.filter-label {
+  font-weight: bold;
+  color: #333; /* Um cinza um pouco mais escuro */
+}
+
+.filter-value {
+  font-weight: bolder;
+  color: #000; /* Um preto mais forte para destacar ainda mais */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tabela do relatório */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+  margin-bottom: 1px; /* Aumentada para dar mais espaço inferior */
+  table-layout: auto; /* Alterado para largura automática */
+}
+
+.report-table thead th {
+  background-color: #c7c7c7;
+  color: #333;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.report-table tbody td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.report-table tfoot td {
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+/* Estilo para a paginação abaixo da tabela */
+.pagination-info {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Estilos para impressão */
+@media print {
+  .toolbar {
+    display: none;
+  }
+
+  .report-container {
+    page-break-after: always;
+    width: 100%;
+    margin: 0;
+    padding: 20mm;
+    box-shadow: none;
+  }
+
+  /* .report-content {
+    page-break-inside: auto;
+  } */
+
+  .report-table thead {
+    display: table-header-group;
+  }
+
+  .report-table tbody tr {
+    page-break-inside: avoid;
+  }
+
+  .report-table tfoot {
+    display: table-footer-group;
+  }
+
+  .report-content,
+  .report-container {
+    height: auto;
+  }
+}
+
+/* CSS para o rodapé */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+
+  font-size: 12px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px; /* Ajustado para menos espaço entre tabela e rodapé */
+  margin-bottom: -5px; /* Ajustado para menos espaço entre tabela e rodapé */
+}
+
+.footer-left {
+  text-align: left;
+  flex: 1;
+}
+
+.footer-center {
+  text-align: center;
+  flex: 1;
+}
+
+.footer-right {
+  text-align: right;
+  flex: 1;
+}
+
+.footer .report-date {
+  font-weight: bold;
+}

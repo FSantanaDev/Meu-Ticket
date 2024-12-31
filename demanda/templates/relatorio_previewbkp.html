@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatório de Demandas - Preview</title>
+    <link rel="stylesheet" href="{% static 'css/relatorio_preview.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <!-- Div para centralizar o título -->
+        <div class="titulo">
+          <h1>Relatório de Demandas</h1>
+        </div>
+        <!-- Div para os filtros organizados horizontalmente -->
+        <div class="filters">
+          <p><strong>Status:</strong> {{ filtros.status }}</p>
+          <p><strong>Área:</strong> {{ filtros.area }}</p>
+          <p><strong>Usuário:</strong> {{ filtros.usuario }}</p>
+          <p><strong>Data Inicial:</strong> {{ filtros.data_inicio }}</p>
+          <p><strong>Data Final:</strong> {{ filtros.data_fim }}</p>
+        </div>
+      </header>
+
+      <main>
+        <table class="demandas-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Status</th>
+              <th>Operador</th>
+              <th>Data de Criação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for demanda in page_obj %}
+            <tr>
+              <td>{{ demanda.id }}</td>
+              <td>{{ demanda.titulo }}</td>
+              <td>{{ demanda.status }}</td>
+              <td>{{ demanda.operador.nome }}</td>
+              <td>{{ demanda.data_criacao|date:"d/m/Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4">Nenhuma demanda encontrada.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </main>
+
+      <footer class="pagination">
+        {% if page_obj.has_previous %}
+        <a
+          class="pagination-link"
+          href="?page={{ page_obj.previous_page_number }}"
+        >
+          &laquo; Anterior
+        </a>
+        {% endif %}
+        <span>
+          Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+        <a class="pagination-link" href="?page={{ page_obj.next_page_number }}">
+          Próxima &raquo;
+        </a>
+        {% endif %}
+      </footer>
+    </div>
+  </body>
+</html>

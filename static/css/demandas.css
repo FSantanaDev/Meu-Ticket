@@ -1,0 +1,138 @@
+
+
+/* demandas.css */
+
+/* Formulário de cadastro de demandas */
+.form-cadastro {
+  width:1000px; /* Define a largura máxima do formulário */
+  margin: 2px auto; /* Centraliza o formulário vertical e horizontalmente */
+  padding: 30px; /* Espaçamento interno */
+  border: 1px solid #ccc; /* Define uma borda ao redor do formulário */
+  border-radius: 10px; /* Deixa as bordas arredondadas */
+  background-color: #f9f9f9; /* Cor de fundo suave */
+  height: 765px;
+}
+
+/* Título do formulário */
+.form-cadastro h2 {
+  text-align: center; /* Centraliza o título */
+  margin-top: -15px; /* Espaçamento inferior do título */
+  margin-bottom: 10px; /* Espaçamento inferior do título */
+}
+
+/* Grupo de campos */
+.form-group {
+  margin-bottom: 15px; /* Espaçamento inferior entre os grupos */
+}
+
+/* Label (rótulo) para os campos */
+.form-group label {
+  display: block; /* Faz o label ocupar toda a linha */
+  margin-bottom: 5px; /* Espaçamento entre o label e o campo */
+  font-weight: bold; /* Deixa o texto em negrito */
+}
+
+/* Inputs e selects */
+.form-group input,
+.form-group select {
+  width: 100%; /* Ocupa toda a largura disponível */
+  padding: 10px; /* Espaçamento interno dos campos */
+  border: 1px solid #ddd; /* Borda dos campos */
+  border-radius: 5px; /* Borda arredondada */
+   /* Espaçamento entre os campos e o botão */}
+
+/* Estilo para o textarea */
+.form-group textarea {
+  width: 100%; /* Largura fixa, 100% da largura disponível */
+  max-width: 100%; /* Impede que o usuário aumente a largura */
+  height: 180px; /* Altura fixa */
+  padding: 10px; /* Espaçamento interno dos campos */
+  border: 1px solid #ddd; /* Borda dos campos */
+  border-radius: 5px; /* Borda arredondada */
+  resize: none; /* Desabilita o redimensionamento pelo usuário */
+  overflow: auto; /* Adiciona a barra de rolagem quando o conteúdo exceder a área */
+}
+
+.form-group-mensagem textarea-mensaegem {
+  width: 100%; /* Largura fixa, 100% da largura disponível */
+  max-width: 100%; /* Impede que o usuário aumente a largura */
+  height: 180px; /* Altura fixa */
+  padding: 10px; /* Espaçamento interno dos campos */
+  border: 1px solid #ddd; /* Borda dos campos */
+  border-radius: 5px; /* Borda arredondada */
+  resize: none; /* Desabilita o redimensionamento pelo usuário */
+  overflow: auto; /* Adiciona a barra de rolagem quando o conteúdo exceder a área */
+}
+
+
+
+
+
+
+
+
+
+/* Botões */
+.button-group {
+  display: flex; /* Exibe os botões lado a lado */
+  justify-content: space-around; /* Deixa os botões distantes um do outro */
+}
+
+/* Estilos para o botão Cadastrar */
+.btn-cadastrar {
+  background-color: #007bff; /* Cor de fundo azul */
+  color: white; /* Cor do texto branco */
+  padding: 10px; /* Espaçamento interno */
+  border: none; /* Remove a borda */
+  border-radius: 5px; /* Deixa as bordas arredondadas */
+  cursor: pointer; /* Muda o cursor para indicar interatividade */
+  margin-top: 15px;
+  width: 100px;
+}
+
+/* Estilo do botão ao passar o mouse */
+.btn-cadastrar:hover {
+  background-color: #0056b3; /* Muda a cor quando o mouse está sobre o botão */
+}
+
+/* Estilos para o botão Cancelar */
+.btn-cancelar {
+  background-color: #dc3545; /* Cor de fundo vermelha */
+  color: white; /* Cor do texto branco */
+  padding: 10px; /* Espaçamento interno */
+  border: none; /* Remove a borda */
+  border-radius: 5px; /* Deixa as bordas arredondadas */
+  cursor: pointer; /* Muda o cursor para indicar interatividade */
+  margin-top: 15px;
+  width: 100px;
+}
+
+/* Estilo do botão Cancelar ao passar o mouse */
+.btn-cancelar:hover {
+  background-color: #c82333; /* Muda a cor quando o mouse está sobre o botão */
+}
+
+/* Estilos das mensagens */
+.alert-success {
+  color: #3c763d;
+  background-color: #ccf3bd;
+  border: 1px solid #d6e9c6;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.alert-error {
+  color: #e01916;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Centraliza as mensagens */
+
+

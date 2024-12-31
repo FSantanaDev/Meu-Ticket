@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  overflow: none;
+}
+
+.toolbar-report {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #b3dbf5;
+  padding: 1px;
+  position: fixed;
+  top: 0;
+  width: 50%;
+}
+
+.report-container {
+  padding: 20px;
+  background-color: #fff;
+  margin-top: 60px; /* Espaço para a barra de ferramentas */
+
+  height: auto;
+}
+
+.report-content {
+  page-break-before: auto;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.page {
+  page-break-after: always;
+  margin-bottom: 20px;
+  height: 100vh;
+}

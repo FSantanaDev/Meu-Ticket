@@ -1,0 +1,119 @@
+/* Estilos gerais */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 1px;
+  overflow: hidden;
+}
+
+.container-main {
+  max-width: 2000px;
+  /* margin: 0 auto; */
+  background-color: #fff;
+  padding: 0px;
+  border-radius: 8px;
+  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);  */
+  margin-left: 75px; /* Adiciona espaço para a barra lateral */
+  height: 100%;
+}
+
+/* Título centralizado */
+h2 {
+  text-align: center;
+  color: #0056b3;
+}
+
+/* Barra lateral vertical */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 80px;
+  background-color: #f3f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0px;
+  /* Mantém a barra lateral fixa e separada do conteúdo principal */
+  /* margin-top:133px; */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 30px;
+}
+
+.sidebar ul li {
+  margin-bottom: 30px;
+}
+
+.sidebar ul li a {
+  color: #000; /* Ajusta a cor do texto dos links para visibilidade */
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar ul li a img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+/* Flex container para alinhar os selects e o formulário lado a lado */
+.form-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 30px; /* Espaço entre a div dos selects e o formulário */
+  /* Adiciona margem para que o conteúdo não fique sobreposto à barra lateral */
+  margin-left: 30px;
+}
+
+/* Estilos da seção de selects (Serviço e Categoria) */
+.left-side {
+  width: 20%; /* Largura da div ao lado do form */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"], textarea, select {
+  width: 98%;
+  padding: 10px;
+  margin-bottom: 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  height: 200px;
+  width: 1200px;
+}
+
+.message-section {
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}

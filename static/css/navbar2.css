@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.welcome {
+  display: flex;
+  text-align: center;
+  background-color: rgb(38, 54, 148);
+  align-items: center;
+  color: rgb(255, 255, 255);
+  gap: 10px;
+  padding: 5px;
+}
+
+.logo {
+  height: 30px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.user-info {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* Estilos do Navbar */
+.navbar {
+  background-color: #d2dde9;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px;
+  color: rgb(44, 17, 143);
+  border: 1px solid black;
+}
+
+.nav-icons {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: left;
+  width: 100%;
+}
+
+.nav-icons li {
+  margin: 0 20px;
+  text-align: center;
+  width: 100px;
+}
+
+.nav-icons a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-icons img {
+  height: 40px;
+  width: 40px;
+  border: 1px solid rgb(156, 152, 152);
+  border-radius: 5px;
+}
+
+.nav-icons span {
+  margin-top: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Alinhamento do ícone "Sair" à direita */
+.nav-exit {
+  margin-left: auto; /* Empurra o botão "Sair" para a direita */
+}
+
+/* Ajustes de foco e hover para o botão "Sair" */
+.nav-icons a:hover,
+.nav-icons a:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}

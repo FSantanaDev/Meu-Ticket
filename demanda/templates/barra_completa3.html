@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/barra_completa.css' %}" />
+  </head>
+  <body>
+    <td class="stiJsViewerClearAllStyles" style="width: 100%">
+      <table
+        class="stiJsViewerClearAllStyles"
+        cellpadding="0"
+        cellspacing="0"
+        align="Default"
+        style="margin: 1px"
+      >
+        <tbody>
+          <tr class="stiJsViewerClearAllStyles">
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDefault"
+                style="
+                  font-family: Arial;
+                  height: 23px;
+                  box-sizing: content-box;
+                  margin: 1px;
+                "
+              >
+                <table
+                  class="stiJsViewerClearAllStyles"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="height: 100%"
+                >
+                  <tbody>
+                    <tr class="stiJsViewerClearAllStyles">
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="line-height: 0; padding: 0px 3px"
+                      >
+                      <img
+                      id="printImage"
+                      src="{% static 'img/print.png' %}"
+                      alt="Imprimir"
+                      style="cursor: pointer"
+                      onclick="window.location.href='{% url 'gerar_pdf' %}?status={{ filtros.status }}&area={{ filtros.area }}&usuario={{ filtros.usuario }}&data_inicio={{ filtros.data_inicio }}&data_fim={{ filtros.data_fim }}'"
+                    />  
+                      </td>
+
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="
+                          padding: 1px 5px 0px 0px;
+                          white-space: nowrap;
+                          text-align: left;               
+                    
+                        "
+                        onclick="window.location.href='{% url 'gerar_pdf' %}?status={{ filtros.status }}&area={{ filtros.area }}&usuario={{ filtros.usuario }}&data_inicio={{ filtros.data_inicio }}&data_fim={{ filtros.data_fim }}'"
+                      >
+                        Imprimir
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDefault"
+                style="
+                  font-family: Arial;
+                  height: 23px;
+                  box-sizing: content-box;
+                  margin: 1px;
+                "
+              >
+                <table
+                  class="stiJsViewerClearAllStyles"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="height: 100%"
+                >
+                  <tbody>
+                    <tr class="stiJsViewerClearAllStyles">
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="line-height: 0; padding: 0px 3px"
+                      >
+                        <img src="{% static 'img/save.png' %}" alt="Salvar" 
+                        onclick="window.location.href='{% url 'gerar_pdf' %}?status={{ filtros.status }}&area={{ filtros.area }}&usuario={{ filtros.usuario }}&data_inicio={{ filtros.data_inicio }}&data_fim={{ filtros.data_fim }}'"
+                        />
+
+                      </td>
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="
+                          padding: 1px 0px 0px;
+                          white-space: nowrap;
+                          text-align: left;
+                        "
+                        onclick="window.location.href='{% url 'gerar_pdf' %}?status={{ filtros.status }}&area={{ filtros.area }}&usuario={{ filtros.usuario }}&data_inicio={{ filtros.data_inicio }}&data_fim={{ filtros.data_fim }}'"
+                      >
+                        Salvar
+                      </td>
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="padding: 0px 5px"
+                      >
+                        <img
+                          src=""
+                          style="margin-top: 1px; vertical-align: baseline"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerToolBarSeparator"
+                style="width: 1px; height: 21px"
+              ></div>
+            </td>
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+            <td class="stiJsViewerClearAllStyles">
+                <div
+                    class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDisabled"
+                    style="
+                    font-family: Arial;
+                    height: 23px;
+                    box-sizing: content-box;
+                    margin: 1px;
+                    "
+                >
+                    <table
+                    class="stiJsViewerClearAllStyles"
+                    cellpadding="0"
+                    cellspacing="0"
+                    style="height: 100%"
+                    >
+                    <tbody>
+                        <tr class="stiJsViewerClearAllStyles">
+                        <td
+                            class="stiJsViewerClearAllStyles"
+                            style="line-height: 0; padding: 0px 3px"
+                        >
+                            <img
+                            src="{% static 'img/first.png' %}"
+                            style="opacity: 0.5"
+                            />
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </td> {% endcomment %}
+            <td class="stiJsViewerClearAllStyles">
+                <button
+                    id="btn-first"
+                    class="navigation-btn"
+                    style="
+                        font-family: Arial;
+                        height: 23px;
+                        box-sizing: content-box;
+                        margin: 1px;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                    "
+                    {% if not page_obj.has_previous %}disabled{% endif %}
+                >
+                    <img
+                        src="{% static 'img/first.png' %}"
+                        alt="Primeira Página"
+                        style="opacity: {% if not page_obj.has_previous %}0.5{% else %}1{% endif %};"
+                    />
+                </button>
+            </td>
+
+
+            <td class="stiJsViewerClearAllStyles">
+             
+                <div
+                class="stiJsViewerToolBarSeparator"
+                style="width: 1px; height: 21px"
+              ></div>
+            
+            </td>
+            
+            <td class="stiJsViewerClearAllStyles">
+                <button
+                    id="btn-previous"
+                    class="navigation-btn"
+                    style="
+                        font-family: Arial;
+                        height: 23px;
+                        box-sizing: content-box;
+                        margin: 1px;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                    "
+                    {% if not page_obj.has_previous %}disabled{% endif %}
+                >
+                    <img
+                        src="{% static 'img/previus.png' %}"
+                        alt="Primeira Página"
+                        style="opacity: {% if not page_obj.has_previous %}0.5{% else %}1{% endif %};"
+                    />
+                </button>
+            </td>
+
+
+
+
+            {% comment %} <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDefault"
+                style="
+                  font-family: Arial;
+                  height: 23px;
+                  box-sizing: content-box;
+                  margin: 1px;
+                "
+              >
+                <table
+                  class="stiJsViewerClearAllStyles"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="height: 100%"
+                >
+                  <tbody>
+                    <tr class="stiJsViewerClearAllStyles">
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="line-height: 0; padding: 0px 3px"
+                      >
+                        <img src="{% static 'img/previus.png' %}" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td> {% endcomment %}
+
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerToolBarSeparator"
+                style="width: 1px; height: 21px"
+              ></div>
+            </td>
+            
+
+            <td class="stiJsViewerClearAllStyles">
+                <button
+                    id="btn-next"
+                    class="navigation-btn"
+                    style="
+                        font-family: Arial;
+                        height: 23px;
+                        box-sizing: content-box;
+                        margin: 1px;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                    "
+                    {% if not page_obj.has_previous %}disabled{% endif %}
+                >
+                    <img
+                        src="{% static 'img/next.png' %}"
+                        alt="Proxima Página"
+                        style="opacity: {% if not page_obj.has_previous %}0.5{% else %}1{% endif %};"
+                    />
+                </button>
+            </td>
+
+
+            <td class="stiJsViewerClearAllStyles">
+                <div
+                  class="stiJsViewerToolBarSeparator"
+                  style="width: 1px; height: 21px"
+                ></div>
+              </td>
+
+
+
+{% comment %} 
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDisabled"
+                style="
+                  font-family: Arial;
+                  height: 23px;
+                  box-sizing: content-box;
+                  margin: 1px;
+                "
+              >
+                <table
+                  class="stiJsViewerClearAllStyles"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="height: 100%"
+                >
+                  <tbody>
+                    <tr class="stiJsViewerClearAllStyles">
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="line-height: 0; padding: 0px 3px"
+                      >
+                        <img
+                          src="{% static 'img/next.png' %}"
+                          style="opacity: 0.5"
+                        />
+                      </td>
+                      <td class="stiJsViewerClearAllStyles">
+                        <div
+                          class="stiJsViewerToolBarSeparator"
+                          style="width: 1px; height: 21px"
+                        ></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td> {% endcomment %}
+
+            <td class="stiJsViewerClearAllStyles">
+                <button
+                    id="btn-last"
+                    class="navigation-btn"
+                    style="
+                        font-family: Arial;
+                        height: 23px;
+                        box-sizing: content-box;
+                        margin: 1px;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                    "
+                    {% if not page_obj.has_previous %}disabled{% endif %}
+                >
+                    <img
+                        src="{% static 'img/last.png' %}"
+                        alt="Proxima Página"
+                        style="opacity: {% if not page_obj.has_previous %}0.5{% else %}1{% endif %};"
+                    />
+                </button>
+            </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}            
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDisabled"
+                style="
+                  font-family: Arial;
+                  height: 23px;
+                  box-sizing: content-box;
+                  margin: 1px;
+                "
+              >
+                <table
+                  class="stiJsViewerClearAllStyles"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="height: 100%"
+                >
+                  <tbody>
+                    <tr class="stiJsViewerClearAllStyles">
+                      <td
+                        class="stiJsViewerClearAllStyles"
+                        style="line-height: 0; padding: 0px 3px"
+                      >
+                        <img
+                          src="{% static 'img/last.png' %}"
+                          style="opacity: 0.5"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+             {% endcomment %}
+
+
+
+
+
+
+
+
+            <td class="stiJsViewerClearAllStyles">
+              <table
+                class="stiJsViewerClearAllStyles"
+                cellpadding="0"
+                cellspacing="0"
+                style="margin: 1px"
+              >
+                <tbody>
+                  <tr class="stiJsViewerClearAllStyles">
+                    <td
+                      class="stiJsViewerClearAllStyles"
+                      style="padding: 0px 2px 0px 0px"
+                    >
+                      Página
+                    </td>
+                    <td class="stiJsViewerClearAllStyles">
+                      <input
+                        name="PageControl"
+                        class="stiJsViewerTextBox stiJsViewerTextBoxDefault"
+                        style="
+                          font-family: Arial;
+                          width: 45px;
+                          height: 21px;
+                          line-height: 21px;
+                          box-sizing: content-box;
+                        "
+                      />
+                    </td>
+                    <td
+                      class="stiJsViewerClearAllStyles"
+                      style="padding: 0px 2px"
+                    >
+                      de
+                    </td>
+                    <td
+                      class="stiJsViewerClearAllStyles"
+                      style="padding: 0px 2px 0px 0px"
+                    >
+                      4
+                    {% comment %} 4 aqui é um exemplo de contadgem de paginas {% endcomment %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerStandartSmallButton stiJsViewerStandartSmallButtonDefault"
+                style="
+                  font-family: Arial;
+                  height: 23px;
+                  box-sizing: content-box;
+                  margin: 1px;
+                "
+              >
+             
+            <td class="stiJsViewerClearAllStyles">
+              <div
+                class="stiJsViewerToolBarSeparator"
+                style="width: 1px; height: 21px"
+              ></div>
+            </td>
+          
+          </tr>
+        </tbody>
+      </table>
+    </td>
+    <script>
+        // Obter os elementos da barra de navegação
+        const btnFirst = document.getElementById("btn-first");
+        const btnPrevious = document.getElementById("btn-previous");
+        const btnNext = document.getElementById("btn-next");
+        const btnLast = document.getElementById("btn-last");
+        const pageInput = document.getElementById("page-input");
+      
+        // Total de páginas e página atual (definidos dinamicamente pelo Django)
+        const totalPages = {{ page_obj.paginator.num_pages }};
+        let currentPage = {{ page_obj.number }};
+      
+        // Função para atualizar a navegação
+        function updateNavigation(newPage) {
+          // Atualizar o número da página
+          currentPage = newPage;
+          pageInput.value = currentPage;
+      
+          // Habilitar/Desabilitar botões conforme necessário
+          btnFirst.disabled = currentPage === 1;
+          btnPrevious.disabled = currentPage === 1;
+          btnNext.disabled = currentPage === totalPages;
+          btnLast.disabled = currentPage === totalPages;
+      
+          // Redirecionar para a nova página
+          const queryParams = new URLSearchParams(window.location.search);
+          queryParams.set("page", currentPage);
+          window.location.href = "?" + queryParams.toString();
+        }
+      
+        // Adicionar eventos aos botões
+        btnFirst.addEventListener("click", () => updateNavigation(1));
+        btnPrevious.addEventListener("click", () => updateNavigation(currentPage - 1));
+        btnNext.addEventListener("click", () => updateNavigation(currentPage + 1));
+        btnLast.addEventListener("click", () => updateNavigation(totalPages));
+      </script>
+
+
+
+  </body>
+</html>

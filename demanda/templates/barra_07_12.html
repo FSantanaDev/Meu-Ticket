@@ -1,0 +1,107 @@
+{% load static %} {% block head %}
+<!-- Carrega o arquivo de estilo CSS -->
+<link rel="stylesheet" href="{% static 'css/styles_gen.css' %}" />
+{% endblock %} {% block content %}
+<!-- Início da barra de ferramentas personalizada -->
+<div class="stiJsViewerToolBar">
+  <div style="padding: 2px">
+    <table
+      class="stiJsViewerToolBarTable"
+      cellpadding="0"
+      cellspacing="0"
+      style="margin: 0px; font-family: Arial"
+    >
+      <tbody>
+        <tr>
+          <td style="width: 100%">
+            <table cellpadding="0" cellspacing="0" style="margin: 1px">
+              <tbody>
+                <tr>
+                  <!-- Botão de Imprimir -->
+                  <td>
+                    <div
+                      id="printButton"
+                      class="stiJsViewerStandartSmallButton"
+                      style="font-family: Arial; height: 23px; margin: 1px"
+                    >
+                      <img
+                        id="printImage"
+                        src="{% static 'img/print.png' %}"
+                        alt="Imprimir"
+                        style="cursor: pointer"
+                        onclick="gerarPDF()"
+                      />
+                      <span
+                        id="printText"
+                        style="cursor: pointer; margin-left: 5px"
+                        onclick="gerarPDF()"
+                      >
+                        Imprimir
+                      </span>
+                    </div>
+                  </td>
+
+                  <!-- Botão de Salvar -->
+                  <td>
+                    <div
+                      id="saveButton"
+                      class="stiJsViewerStandartSmallButton"
+                      style="font-family: Arial; height: 23px; margin: 1px"
+                      onclick="gerarPDF()"
+                    >
+                      <img
+                        src="{% static 'img/save.png' %}"
+                        alt="Salvar"
+                        style="cursor: pointer"
+                      />
+                      <span style="margin-left: 5px; cursor: pointer">
+                        Salvar
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Inclua a biblioteca html2pdf.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+  function gerarPDF() {
+    // Adiciona o parâmetro exportar_pdf=true à URL
+    const url = window.location.href.includes('?')
+      ? `${window.location.href}&exportar_pdf=true`
+      : `${window.location.href}?exportar_pdf=true`;
+  
+    // Faz a requisição para obter o HTML completo
+    fetch(url)
+      .then((response) => response.text())
+      .then((html) => {
+        // Gera o PDF a partir do conteúdo recebido
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const relatorio = doc.getElementById('relatorio-container');
+  
+        const opcoes = {
+          margin: [10, 10, 10, 10],
+          filename: 'Relatorio_Demandas.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        };
+  
+        html2pdf().set(opcoes).from(relatorio).save();
+      });
+  }
+
+  // Adiciona o evento de clique aos botões de impressão e salvar
+  document.getElementById('printImage').addEventListener('click', gerarPDF);
+  document.getElementById('printText').addEventListener('click', gerarPDF);
+</script>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+.form-cadastro {
+    max-width: 500px; /* Define a largura máxima do formulário */
+    margin: 30px auto; /* Ajusta o espaçamento superior para centralizar verticalmente */
+    padding: 30px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda do formulário */
+    border-radius: 10px; /* Borda arredondada */
+    background-color: #f9f9f9; /* Cor de fundo do formulário */
+    height: 680px;
+  }
+  
+  /* Estilos para o título do formulário */
+  .form-cadastro h2 {
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px; /* Espaçamento inferior do título */
+    margin-top: 1px;
+  }
+  
+  /* Estilos para os grupos de campos do formulário */
+  .form-group {
+    margin-bottom: 10px; /* Espaçamento inferior entre cada grupo */
+  }
+  
+  /* Estilos para os labels (rótulos) */
+  .form-group label {
+    display: block; /* Faz com que o label ocupe toda a linha */
+    margin-bottom: 1px;  /* Espaçamento inferior do label */
+    font-weight: bold; /* Deixa o texto do label em negrito */
+  }
+  
+  /* Estilos para os inputs (campos de entrada) */
+  .form-group input,
+  .form-group select {
+    width: 100%; /* Faz com que os campos ocupem toda a largura disponível */
+    padding: 10px; /* Espaçamento interno dos campos */
+    margin-top: 1px; /* Espaçamento superior dos campos */
+    border: 1px solid #ddd; /* Borda dos campos */
+    border-radius: 5px; /* Borda arredondada dos campos */
+  }
+  
+  /* Grupo de botões */
+  .button-group {
+    display: flex; /* Define que os botões serão exibidos lado a lado */
+    justify-content: space-between; /* Deixa os botões separados nas extremidades */
+    margin-top: 40px; /* Espaçamento superior entre os campos e os botões */
+  }
+  
+  /* Estilos para o botão Cadastrar */
+  .btn-cadastrar {
+    width: 48%; /* Define que o botão ocupe quase metade da largura */
+    padding: 10px; /* Espaçamento interno */
+    background-color: #007bff; /* Cor de fundo azul */
+    color: white; /* Cor do texto */
+    border: none; /* Remove bordas */
+    border-radius: 5px; /* Borda arredondada */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+  }
+  
+  /* Estilo ao passar o mouse sobre o botão Cadastrar */
+  .btn-cadastrar:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  }
+  
+  /* Estilos para o botão Cancelar */
+  .btn-cancelar {
+    width: 48%; /* Define que o botão ocupe quase metade da largura */
+    padding: 10px; /* Espaçamento interno */
+    background-color: #dc3545; /* Cor de fundo vermelha */
+    color: white; /* Cor do texto */
+    border: none; /* Remove bordas */
+    border-radius: 5px; /* Borda arredondada */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+  }
+  
+  /* Estilo ao passar o mouse sobre o botão Cancelar */
+  .btn-cancelar:hover {
+    background-color: #c82333; /* Cor de fundo ao passar o mouse */
+  }
+  
+  
+  .alert-success {
+    color: #3c763d;
+    background-color: #ccf3bd;
+    border-color: #d6e9c6;
+  }
+  
+  .alert-error {
+    color: #e01916;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  
+  /* Estilo para mensagens de erro nos campos */
+  .error-message {
+    color: #ff0000; /* Cor vermelha para os erros */
+    font-size: 14px; /* Tamanho da fonte */
+    margin-bottom: 5px; /* Espaçamento entre o erro e o campo */
+  }
+
+
+/* Estilo dos campos inválidos */
+.is-invalid {
+    border-color: #ff0000; /* Borda vermelha */
+    background-color: #f79b9b; /* Fundo vermelho claro */
+  }
+  
+  /* Remove a cor de fundo de erro quando o campo está em foco */
+  .form-control.is-invalid:focus {
+    border-color: #dc3545; /* Mantém a cor da borda ao focar */
+    background-color: #ffffff; /* Cor de fundo normal ao focar */
+  }

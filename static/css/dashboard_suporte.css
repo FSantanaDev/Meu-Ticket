@@ -1,0 +1,55 @@
+/* Estilo do container */
+.container {
+    max-width: 800px; /* Largura máxima do container */
+    margin: 0 auto; /* Centraliza o container horizontalmente */
+    padding: 20px; /* Espaçamento interno */
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: 1px solid #c9c6c6; /* Borda suave */
+    width: 100%;
+    margin-top: 10px;
+    height: 750px;
+    overflow-y: auto;  /* Adiciona a barra de rolagem vertical */
+}
+
+/* Estilo do título */
+h2 {
+    text-align: center; /* Centraliza o título */
+    color: #333; /* Cor do texto */
+}
+
+/* Estilo da lista de demandas */
+.lista-demandas {
+    list-style-type: none; /* Remove marcadores da lista */
+    padding: 0; /* Remove preenchimento */
+}
+
+/* Estilo de cada item da demanda */
+.demanda-item {
+    padding: 15px; /* Espaçamento interno */
+    margin: 10px 0; /* Espaçamento entre os itens */
+    border: 1px solid #dee2e6; /* Borda suave */
+    border-radius: 4px; /* Bordas arredondadas */
+    background-color: #ffffff; /* Cor de fundo branca */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+/* Efeito de hover sobre os itens */
+.demanda-item:hover {
+    background-color: #f1f1f1; /* Muda a cor ao passar o mouse */
+}
+
+/* Estilo do link de detalhes */
+.detalhes-link {
+    display: inline-block; /* Permite definir margens */
+    margin-top: 10px; /* Espaçamento acima do link */
+    text-decoration: none; /* Remove sublinhado */
+    color: #007bff; /* Cor do link */
+    font-weight: bold; /* Texto em negrito */
+}
+
+/* Efeito de hover sobre o link de detalhes */
+.detalhes-link:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
