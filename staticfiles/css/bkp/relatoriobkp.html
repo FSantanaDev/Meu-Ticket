@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Relatório de Demandas{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/relatorio_demanda.css' %}" />
+
+<div class="container-main">
+    <div class="toolbar">
+        <button id="btn-visualizar" class="btn-toolbar">Visualizar</button> <!-- Atribuir um ID para facilitar o seletor -->
+        <button class="btn-toolbar">Limpar</button>
+        <button class="btn-toolbar">Sair</button>
+    </div>
+
+    <div class="filter-report-section">
+        
+        <!-- Painel de Filtros -->
+        <div class="filter-panel">
+            <h2>Filtros</h2>
+            <form id="relatorioForm">
+                
+                
+                
+                <div class="form-group">                 
+                   
+                   
+                    <label for="unidade">Status</label>
+                    <select name="status" id="status">
+                        <option value="todos">Todos</option> <!-- Adicionado -->
+                        {% for s in status_options %}
+                            <option value="{{ s.0 }}">{{ s.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="servicos">Area</label>
+                    <select name="area" id="area">
+                        <option value="todos">Todas</option> <!-- Adicionado -->
+                        {% for area in areas %}
+                            <option value="{{ area.id }}">{{ area.nomearea }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <label for="usuario">Usuário</label>
+                    <select name="usuario" id="usuario">
+                        <option value="todos">Todos</option> <!-- Adicionado -->
+                        {% for usuario in usuarios %}
+                            <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                {% comment %} <div class="form-group">
+                    <label for="data_inicio">Período de Realização</label>
+                    
+                  
+                    
+                    <div class="form-group">
+                        <label for="data_inicio">Data Início</label>
+                        <input type="date" name="data_inicio" id="data_inicio">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="data_fim">Data Fim</label>
+                        <input type="date" name="data_fim" id="data_fim">
+                    </div>
+                
+                
+                </div>  
+                 {% endcomment %}
+                
+                <div class="input-group">
+                    <label for="periodo">Período de Realização</label>
+                    <div class="period">
+                        <input type="date" id="inicio" value="2024-09-01">
+                        <span>a</span>
+                        <input type="date" id="fim" value="2024-09-30">
+                    </div>
+                </div>
+
+
+
+
+             
+
+              
+
+            
+           
+           
+            </form>
+        </div>
+
+        <!-- Painel de Relatório -->
+        <div class="report-panel">
+            <iframe id="relatorioFrame" src=""></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+  // Escuta o evento de clique no botão "Visualizar"
+document.getElementById('btn-visualizar').addEventListener('click', function(event) {
+    event.preventDefault(); // Impede o comportamento padrão, que poderia recarregar a página
+
+    // Captura o formulário e os dados
+    var form = document.getElementById('relatorioForm');
+    var formData = new FormData(form);
+
+    // Monta a URL com os parâmetros do filtro
+    var url = "{% url 'relatorio_view' %}?" + new URLSearchParams(formData).toString();
+
+    // Atualiza o iframe com o relatório
+    document.getElementById('relatorioFrame').src = url;
+});
+</script>
+
+{% endblock %}

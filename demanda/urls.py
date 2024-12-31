@@ -1,11 +1,9 @@
 
-
-
-
 # urls.py
 
 from django.urls import path
 from . import views  # Supondo que todas as views estejam no mesmo módulo `views`
+from demanda.management_views import run_migrations
 
 urlpatterns = [
     # Outras rotas
@@ -30,7 +28,9 @@ urlpatterns = [
     #path('export/excel/', views.gerar_relatorio_excel, name='gerar_relatorio_excel'),
     #path('relatorio/pdf/', views.gerar_relatorio_pdf, name='gerar_relatorio_pdf'),
     path('gerar_pdf/', views.gerar_pdf, name='gerar_pdf'),
+    path('run-migrations/', run_migrations, name='run-migrations'),
     
+
    # path('relatorio/imprimir/', views.imprimir_relatorio_pdf, name='imprimir_relatorio_pdf'),
     
 ]

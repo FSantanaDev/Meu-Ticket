@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relatório de Demandas</title>
+    <link rel="stylesheet" href="{% static 'css/relatorio_template.css' %}" />
+  </head>
+  <body>
+    <!-- Barra de ferramentas fixa para navegação e controle -->
+    <div class="toolbar-fixed">
+      <button onclick="window.print();">Imprimir</button>
+      <button onclick="window.history.back();">Voltar</button>
+      <!-- Adicione outros botões conforme necessário -->
+    </div>
+
+    <div class="report-container">
+      <h1>Relatório de Demandas</h1>
+
+      <!-- Informações dos filtros aplicados -->
+      <div class="filter-info">
+        <p><strong>Status:</strong> {{ filtros.status }}</p>
+        <p><strong>Área:</strong> {{ filtros.area }}</p>
+        <p><strong>Usuário:</strong> {{ filtros.usuario }}</p>
+        <p><strong>Período:</strong> {{ filtros.data_inicio }} a {{ filtros.data_fim }}</p>
+      </div>
+
+      <!-- Tabela de demandas filtradas -->
+      <div class="table-scrollable">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Área</th>
+              <th>Usuário</th>
+              <th>Data de Criação</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for demanda in demandas_filtradas %}
+            <tr>
+              <td>{{ demanda.id }}</td>
+              <td>{{ demanda.get_status_display }}</td>
+              <td>{{ demanda.area.nomearea }}</td>
+              <td>{{ demanda.operador.nome }}</td>
+              <td>{{ demanda.data_criacao|date:"d/m/Y" }}</td>
+              <td>{{ demanda.descricao }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box; /* Garante que padding e borda sejam incluídos no total da largura e altura */
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif; /* Define uma fonte padrão */
+    background-color: #f4f4f9; /* Cor de fundo suave */
+  }
+  
+  .container {
+    width: 90%; /* Reduz a largura do contêiner em dispositivos menores */
+    max-width: 1200px; /* Limita a largura máxima */
+    margin: 30px auto; /* Centraliza o contêiner com margem superior */
+    padding: 20px; /* Espaçamento interno do contêiner */
+    background-color: white; /* Cor de fundo branca */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil ao redor */
+    border: 1px solid #666; /* Adiciona uma borda cinza */
+  }
+  
+  h1 {
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 30px; /* Espaçamento inferior */
+    font-size: 22px; /* Ajusta o tamanho da fonte */
+    color: #1a39ec; /* Cor azul */
+  }
+  
+  .filter-form {
+    display: grid; /* Usa grid layout para os inputs */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta dinamicamente os inputs */
+    gap: 20px; /* Espaçamento entre os elementos */
+    margin-bottom: 10px; /* Espaçamento inferior do formulário */
+  }
+  
+  .form-group {
+    display: flex; /* Define um layout flexível */
+    flex-direction: column; /* Coloca os elementos em coluna */
+  }
+  
+  .form-group label {
+    margin-bottom: 5px; /* Espaçamento inferior do rótulo */
+    color: #666; /* Cor do texto */
+    font-size: 14px; /* Tamanho da fonte */
+  }
+  
+  .filter-form input,
+  .filter-form select {
+    padding: 10px; /* Ajusta o espaçamento interno */
+    border: 1px solid #ccc; /* Define borda cinza clara */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 14px; /* Tamanho do texto */
+  }
+  
+  .btn {
+    padding: 8px 20px; /* Ajusta o espaçamento interno do botão */
+    background-color: #1a39ec; /* Cor de fundo azul */
+    color: white; /* Cor do texto branco */
+    border: none; /* Remove borda padrão */
+    border-radius: 4px; /* Bordas arredondadas */
+    cursor: pointer; /* Define o cursor como pointer */
+    font-size: 14px; /* Tamanho do texto */
+    height: 37px; /* Altura fixa */
+  }
+  
+  .btn:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  }
+  
+  .tabela-container {
+    max-height: 500px; /* Altura máxima do contêiner */
+    overflow-x: auto; /* Adiciona rolagem horizontal em telas pequenas */
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    border: 1px solid #ccc; /* Define borda cinza */
+    position: relative; /* Cria um contexto para posicionamento */
+    margin-top: 20px; /* Espaçamento superior */
+  }
+  
+  .demandas-table {
+    width: 100%; /* Largura total da tabela */
+    border-collapse: collapse; /* Remove espaços entre as bordas */
+    table-layout: auto; /* Permite que as colunas se ajustem dinamicamente */
+  }
+  
+  .demandas-table th,
+  .demandas-table td {
+    padding: 12px; /* Espaçamento interno */
+    text-align: left; /* Alinha o texto à esquerda */
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+  }
+  
+  .demandas-table th {
+    background-color: #f2f2f2; /* Cor de fundo cinza claro */
+    position: sticky; /* Faz o cabeçalho ficar fixo ao topo */
+    top: 0; /* Define a posição superior do cabeçalho */
+    z-index: 3; /* Garante que o cabeçalho fique acima do conteúdo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil abaixo do cabeçalho */
+  }
+  
+  .demandas-table tr:hover {
+    background-color: #f1f1f1; /* Cor de fundo ao passar o mouse */
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    .filter-form {
+      grid-template-columns: 1fr; /* Coloca todos os campos em uma coluna */
+    }
+  
+    .btn {
+      width: 100%; /* Botão ocupa toda a largura em telas pequenas */
+    }
+  }
+  

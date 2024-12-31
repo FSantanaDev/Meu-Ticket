@@ -1,0 +1,146 @@
+<!--relatorio_template.html-->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatório de Demandas</title>
+    <link rel="stylesheet" href="{% static 'css/relatorio_template.css' %}" />
+  </head>
+  <body>
+    <!-- Barra de ferramentas do relatório -->
+    <div class="toolbar-report">
+      <button class="btn-toolbar-report" onclick="window.print()">
+        <img
+          src="{% static 'icons/print.png' %}"
+          alt="Imprimir"
+          width="16"
+          height="16"
+        />
+        Imprimir
+      </button>
+
+      <button class="btn-toolbar-report" onclick="salvarRelatorio()">
+        <img
+          src="{% static 'icons/save.png' %}"
+          alt="Salvar"
+          width="16"
+          height="16"
+        />
+        Salvar
+      </button>
+
+      <div class="btn-group-report">
+        <button class="btn-toolbar-report" onclick="paginaAnterior()">
+          Anterior
+        </button>
+        <span>
+          Página <input type="text" id="page-number" value="1" size="1" /> de 1
+        </span>
+        <button class="btn-toolbar-report" onclick="proximaPagina()">
+          Próxima
+        </button>
+      </div>
+
+      <div class="btn-group-report">
+        <span class="zoom-label">Zoom:</span>
+        <select
+          id="zoom-level"
+          class="btn-toolbar-report"
+          onchange="ajustarZoom()"
+        >
+          <option value="50%">50%</option>
+          <option value="75%">75%</option>
+          <option value="100%" selected>100%</option>
+          <option value="125%">125%</option>
+          <option value="150%">150%</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Conteúdo do Relatório -->
+    <div class="report-content" id="report-content">
+      <h1>Relatório de Demandas</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Área</th>
+            <th>Usuário</th>
+            <th>Data Criação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for demanda in demandas_filtradas %}
+          <tr>
+            <td>{{ demanda.id }}</td>
+            <td>{{ demanda.descricao }}</td>
+            <td>{{ demanda.get_status_display }}</td>
+            <td>{{ demanda.area.nomearea }}</td>
+            <td>{{ demanda.operador.nome }}</td>
+            <td>{{ demanda.data_criacao|date:"d/m/Y" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Script para funcionalidades do relatório -->
+    <script>
+      // Função para ajustar o zoom do relatório
+      function ajustarZoom() {
+        const zoomLevel = document.getElementById('zoom-level').value;
+        document.getElementById('report-content').style.zoom = zoomLevel;
+      }
+
+      // Função para salvar o relatório (exemplo básico)
+      function salvarRelatorio() {
+        alert('Função de salvamento em construção...');
+      }
+
+      // Variáveis para controle de páginas
+      var paginaAtual = 1;
+      var totalPaginas = 1; // Substitua pelo valor real quando houver lógica para determinar o total de páginas
+
+      // Função para avançar para a próxima página
+      function proximaPagina() {
+        if (paginaAtual < totalPaginas) {
+          paginaAtual++;
+          atualizarPagina();
+        }
+      }
+
+      // Função para voltar para a página anterior
+      function paginaAnterior() {
+        if (paginaAtual > 1) {
+          paginaAtual--;
+          atualizarPagina();
+        }
+      }
+
+      // Função para atualizar a visualização da página atual
+      function atualizarPagina() {
+        document.getElementById('page-number').value = paginaAtual;
+        // Aqui você pode adicionar lógica para carregar o conteúdo da página específica
+      }
+
+      // Permite navegação direta pelo campo de número de página
+      document
+        .getElementById('page-number')
+        .addEventListener('change', function () {
+          var novaPagina = parseInt(this.value);
+          if (novaPagina >= 1 && novaPagina <= totalPaginas) {
+            paginaAtual = novaPagina;
+            atualizarPagina();
+          } else {
+            alert('Número de página inválido.');
+          }
+        });
+    </script>
+  </body>
+</html>

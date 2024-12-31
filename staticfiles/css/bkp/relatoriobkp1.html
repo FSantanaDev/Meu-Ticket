@@ -1,0 +1,100 @@
+  <!-- relatorio.html-->
+
+
+{% extends 'base.html' %} 
+{% load static %} 
+{% block titulo %}Relatório de Demandas{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/relatorio_demanda.css' %}" />
+
+<div class="container-main">
+  <!-- Formulário e Filtros -->
+  <div class="filter-report-section">
+    <!-- Painel de Filtros com a barra de ferramentas -->
+    <div class="filter-panel">
+      <form id="relatorioForm">
+        <!-- Barra de Ferramentas dentro do form -->
+        <div class="toolbar">
+          <button id="btn-visualizar" class="btn-toolbar">Visualizar</button>
+          <button type="reset" class="btn-toolbar">Limpar</button>
+          <button class="btn-toolbar">Sair</button>
+        </div>
+
+        <!-- Campos de Filtros -->
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select name="status" id="status">
+            <option value="todos">Todos</option>
+            {% for s in status_options %}
+            <option value="{{ s.0 }}">{{ s.1 }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="area">Área</label>
+          <select name="area" id="area">
+            <option value="todos">Todas</option>
+            {% for area in areas %}
+            <option value="{{ area.id }}">{{ area.nomearea }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="usuario">Usuário</label>
+          <select name="usuario" id="usuario">
+            <option value="todos">Todos</option>
+            {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="periodo">Período de Realização</label>
+          <div class="period">
+            <input type="date" id="inicio" value="2024-09-01" />
+            <span>a</span>
+            <input type="date" id="fim" value="2024-09-30" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Painel de Relatório com a barra de ferramentas fixada -->
+    <div class="report-panel">
+      <!-- Ajuste para aumentar a área do iframe -->
+      <iframe id="relatorioFrame" src="" style="height: 70vh;"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('btn-visualizar').addEventListener('click', function (event) {
+    event.preventDefault(); // Impede o comportamento padrão de recarregar a página
+
+    // Captura o formulário e os dados
+    var form = document.getElementById('relatorioForm');
+    var formData = new FormData(form);
+
+    // Monta a URL com os parâmetros do filtro
+    var url = "{% url 'relatorio_view' %}?" + new URLSearchParams(formData).toString();
+
+    // Atualiza o iframe com o relatório
+    var iframe = document.getElementById('relatorioFrame');
+    iframe.src = url;
+
+    // Ajusta o iframe para ocupar toda a altura da tela e permitir a rolagem interna
+    iframe.style.height = '100vh'; // Ajuste a altura para utilizar mais área da tela
+    iframe.style.overflowY = 'auto'; // Permite rolagem vertical interna no iframe
+
+    // Ajusta a altura do iframe para se ajustar ao conteúdo
+    iframe.onload = function () {
+      var iframeDoc = iframe.contentWindow.document;
+      iframe.style.height = iframeDoc.body.scrollHeight + 'px'; // Ajusta para altura do conteúdo
+    };
+  });
+</script>
+{% endblock %}

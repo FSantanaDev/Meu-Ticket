@@ -1,0 +1,177 @@
+/* Estilização do container do formulário */
+.form-container {
+  display: flex;
+
+  padding: 10px;
+  gap: 100px;
+  box-sizing: border-box;
+  border: 0.5px solid #c7c3c3;
+  height: 560px;
+  width: 95%;
+
+  margin-left: 40px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+h2 {
+  color: #4733f7;
+  align-content: center;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.form-column-left {
+  width: 20%; /* Define a largura para cada coluna */
+}
+
+.form-column-right {
+  width: 70%; /* Define a largura para cada coluna */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Espaçamento entre os grupos de formulário */
+}
+
+/* Estilização dos labels */
+label {
+  color: #4733f7;
+  display: block;
+  font-weight: medium;
+  margin-bottom: 5px;
+}
+
+/* Estilização para os campos de input e select */
+
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+/* Estilização para o campo de upload de imagem */
+input[type='file'] {
+  padding: 10px;
+  border: none;
+}
+
+/* Estilização dos botões */
+.form-actions {
+  display: flex;
+  margin-top: 20px;
+  gap: 50px; /* Espaçamento entre os botões */
+  justify-content: center; /* Centraliza os botões no contêiner */
+}
+
+.form-actions {
+  display: flex;
+  margin-top: 20px;
+  gap: 50px; /* Espaçamento entre os botões */
+  justify-content: center; /* Centraliza os botões no contêiner */
+}
+
+button {
+  padding: 10px 20px; /* Preenchimento interno */
+  font-size: 16px; /* Tamanho da fonte */
+  border-radius: 5px; /* Bordas arredondadas */
+  border: none; /* Remove a borda padrão */
+  cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+  width: 150px; /* Largura fixa para os botões */
+  text-align: center; /* Alinha o texto ao centro */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}
+
+button.btn-primary {
+  background-color: #1a39ec; /* Cor de fundo para o botão primário */
+  color: white; /* Cor do texto para o botão primário */
+}
+
+button.btn-primary:hover {
+  background-color: #0b3b6b; /* Cor de fundo para o botão primário ao passar o mouse */
+  color: white; /* Cor do texto para o botão primário ao passar o mouse */
+}
+
+button.btn-secondary {
+  background-color: #6c757d; /* Cor de fundo para o botão secundário */
+  color: white; /* Cor do texto para o botão secundário */
+}
+
+button.btn-secondary:hover {
+  /* Corrigido para 'btn-secondary' */
+  background-color: #333435; /* Cor de fundo para o botão secundário ao passar o mouse */
+  color: white; /* Cor do texto para o botão secundário ao passar o mouse */
+}
+
+button.btn-imagem {
+  background-color: #1a39ec; /* Cor de fundo para o botão primário */
+  color: white; /* Cor do texto para o botão primário */
+  height: 30px; /* Ajusta a altura automaticamente */
+  padding: 10px 20px; /* Adiciona espaço interno ao botão */
+  font-size: 16px; /* Ajusta o tamanho da fonte */
+  border: none; /* Remove a borda padrão */
+  border-radius: 5px; /* Arredonda os cantos do botão */
+  white-space: nowrap; /* Impede a quebra de linha no texto */
+  text-align: center; /* Alinha o texto ao centro */
+  display: flex; /* Usa flexbox para alinhar o conteúdo */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+}
+
+button.btn-imagem:hover {
+  background-color: #0b3b6b; /* Cor de fundo para o botão primário ao passar o mouse */
+  color: white; /* Cor do texto para o botão primário ao passar o mouse */
+  cursor: pointer; /* Muda o cursor para indicar que o botão é clicável */
+}
+
+.number {
+  color: #007bff; /* Cor do texto */
+  font-weight: bold; /* Negrito */
+  font-size: 1.5em; /* Aumenta o tamanho da fonte */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra para dar destaque */
+  text-align: left; /* Alinha o texto à esquerda */
+  margin-top: 10px;
+}
+
+.alert-success {
+  background-color: #d4edda; /* Cor de fundo verde claro */
+  color: #155724; /* Cor do texto em verde escuro */
+  padding: 10px;
+  border: 1px solid #c3e6cb; /* Bordas em um verde mais escuro */
+  border-radius: 5px;
+  margin-bottom: 10px; /* Espaçamento abaixo */
+}
+
+.alert-error {
+  background-color: #f8d7da; /* Cor de fundo vermelho claro */
+  color: #721c24; /* Cor do texto em vermelho escuro */
+  padding: 10px;
+  border: 1px solid #f5c6cb; /* Bordas em um vermelho mais escuro */
+  border-radius: 5px;
+  margin-bottom: 10px; /* Espaçamento abaixo */
+}
