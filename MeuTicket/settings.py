@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-+xw@*em@l(3fud+isaa%kc*q*$v%rptuzf2wfq#uonn2#of#ln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['meuticket-tn2p.onrender.com', 'localhost', '127.0.0.1']
+
 
 LOGIN_URL = 'login'  # URL para a página de login
 LOGIN_REDIRECT_URL = 'homepage'  # Redireciona para a homepage após login
