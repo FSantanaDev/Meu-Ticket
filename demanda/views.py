@@ -118,40 +118,7 @@ def filtrar_demandas(request):
     return render(request, 'filtros.html', {
         'demandas': queryset
     })
-  
-    
- 
-
-# def cadastrar_nova_demanda(request):
-#     if request.method == 'POST':
-#         form = Nova_DemandaForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             demanda = form.save(commit=False)
-#             if request.user.area:
-#                 demanda.area = request.user.area
-#             else:
-#                 messages.error(request, 'Usuário não tem área associada.')
-#                 return render(request, 'cadastrar_nova_demanda.html', {
-#                     'form': form,
-#                     #'novo_id': gerar_novo_id()  # Remover ou substituir esta linha
-#                 })
-
-#             demanda.operador = request.user
-#             demanda.save()
-#             messages.success(request, 'Demanda cadastrada com sucesso!')
-#             return redirect('cadastrar_nova_demanda')
-#     else:
-#         form = Nova_DemandaForm()
-
-#     ultima_demanda = Demanda.objects.all().order_by('id').last()
-#     novo_id = ultima_demanda.id + 1 if ultima_demanda else 1
-
-#     return render(request, 'cadastrar_nova_demanda.html', {
-#         'form': form,
-#         'novo_id': novo_id,
-#         'messages': messages.get_messages(request),  # Adiciona mensagens ao contexto
-#     })
-    
+        
 def cadastrar_nova_demanda(request):
     if request.method == 'POST':
         form = Nova_DemandaForm(request.POST, request.FILES)
@@ -170,10 +137,10 @@ def cadastrar_nova_demanda(request):
 
             # Enviar e-mail para o usuário
             try:
-                assunto = "Nova demanda cadastrada"
+                assunto = f"Nova demanda: {demanda.titulo} cadastrada"
                 mensagem = (
                     f"Olá, {request.user.nome}!\n\n"
-                    f"Você cadastrou uma nova demanda no sistema com o ID {demanda.id}.\n\n"
+                    f"Você cadastrou uma nova demanda no sistema com o Título {demanda.titulo} e ID {demanda.id}.\n\n"
                     "Detalhes da demanda:\n"
                     f"Título: {demanda.titulo}\n"
                     f"Área: {demanda.area}\n"
@@ -200,36 +167,6 @@ def cadastrar_nova_demanda(request):
         'novo_id': novo_id,
         'messages': messages.get_messages(request),  # Adiciona mensagens ao contexto
     }) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    
