@@ -180,6 +180,33 @@ def historico_demanda(request, id_demanda):
 
 
 
+# def enviar_mensagem(request, demanda_id):
+#     # Busca a demanda associada ao ID
+#     demanda = get_object_or_404(Demanda, id=demanda_id)
+
+#     if request.method == 'POST':
+#         # Obtém o texto da mensagem do formulário
+#         texto_mensagem = request.POST.get('mensagem')
+
+#         # Verifica se o campo da mensagem não está vazio
+#         if texto_mensagem:
+#             # Cria uma nova instância de Mensagem e salva no banco de dados
+#             nova_mensagem = Mensagem(
+#                 demanda=demanda,
+#                 autor=request.user,  # Quem está logado e enviando a mensagem
+#                 texto=texto_mensagem,
+#                 data_envio=timezone.now()
+#             )
+#             nova_mensagem.save()
+
+#             # Redireciona para a mesma página, mas usando o nome correto do argumento na URL
+#             return redirect('historico_demanda', id_demanda=demanda.id)
+
+#     # Se for uma requisição GET, apenas renderiza a página com a demanda
+#     return render(request, 'historico_demanda.html', {'demanda': demanda})
+
+
+
 def enviar_mensagem(request, demanda_id):
     # Busca a demanda associada ao ID
     demanda = get_object_or_404(Demanda, id=demanda_id)
@@ -195,15 +222,38 @@ def enviar_mensagem(request, demanda_id):
                 demanda=demanda,
                 autor=request.user,  # Quem está logado e enviando a mensagem
                 texto=texto_mensagem,
-                data_envio=timezone.now()
+                #data_envio=timezone.now()
+                data_envio=now() 
             )
             nova_mensagem.save()
 
-            # Redireciona para a mesma página, mas usando o nome correto do argumento na URL
-            return redirect('historico_demanda', id_demanda=demanda.id)
+            try:
+                # Obtém o operador (autor da demanda) para enviar o e-mail
+                operador = demanda.operador
+                assunto = f"Nova mensagem na demanda {demanda.titulo}"
+                mensagem = (
+                    f"Olá, {operador.nome}!\n\n"  # Usa o nome do operador
+                    f"Você recebeu uma nova mensagem na sua demanda {demanda.titulo}.\n\n"
+                    "Detalhes da demanda:\n"
+                    f"Título: {demanda.titulo}\n"
+                    f"Área: {demanda.area}\n"
+                    f"Status: {demanda.status}\n\n"
+                    "Obrigado por utilizar o sistema MeuTicket!\n"
+                )
+                remetente = 'bragasan34@gmail.com'
+                destinatario = [operador.email]  # E-mail do operador da demanda
 
-    # Se for uma requisição GET, apenas renderiza a página com a demanda
-    return render(request, 'historico_demanda.html', {'demanda': demanda})
+                send_mail(assunto, mensagem, remetente, destinatario)
+                messages.success(request, 'Mensagem cadastrada com sucesso! E-mail enviado para o autor da demanda!')
+            except Exception as e:
+                messages.error(request, f'Erro ao enviar o e-mail: {str(e)}')
+                
+
+
+
+
+
+
 
 
 
