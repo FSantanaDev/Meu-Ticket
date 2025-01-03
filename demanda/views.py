@@ -10,11 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.utils import timezone  # Para lidar com datas
 from .models import Area, Servico, Urgencia, Demanda,Mensagem, Usuario
-import logging
 from django.http import HttpResponse
 from django.template.loader import get_template
 from io import BytesIO
-
 from django.template.loader import get_template
 from reportlab.lib.pagesizes import A4,letter
 from reportlab.pdfgen import canvas
@@ -22,8 +20,18 @@ from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
-
 from textwrap import wrap
+from datetime import datetime, timedelta
+from django.utils.timezone import now
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+#import pandas as pd
+from django.utils.dateparse import parse_date
+from django.template.loader import render_to_string
+#from xhtml2pdf import pisa
+from urllib.parse import urlencode  # Import para construir query strings
+import os
+
 
 
 
