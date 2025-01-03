@@ -310,6 +310,8 @@ def dashboard_suporte(request):
 
 
 @login_required
+
+@login_required
 def iniciar_atendimento(request, demanda_id):
     demanda = get_object_or_404(Demanda, id=demanda_id)
 
@@ -319,32 +321,30 @@ def iniciar_atendimento(request, demanda_id):
         demanda.realizador = request.user
         demanda.save()
 
-        messages.success(request, 'Atendimento iniciado com sucesso!')
+        # Enviar e-mail para o autor da demanda
+        try:
+            operador = demanda.operador  # Autor da demanda
+            assunto = f"Atendimento iniciado na demanda: {demanda.titulo}"
+            mensagem = (
+                f"Olá, {operador.nome}!\n\n"
+                f"O operador {request.user.nome} iniciou o atendimento da sua demanda.\n\n"
+                "Detalhes da demanda:\n"
+                f"Título: {demanda.titulo}\n"
+                f"Área: {demanda.area}\n"
+                f"Status: {demanda.status}\n\n"
+                "Obrigado por utilizar o sistema MeuTicket!\n"
+            )
+            remetente = 'bragasan34@gmail.com'
+            destinatario = [operador.email]  # E-mail do operador da demanda
+
+            send_mail(assunto, mensagem, remetente, destinatario)
+            messages.success(request, 'Atendimento iniciado com sucesso! E-mail enviado ao autor da demanda.')
+        except Exception as e:
+            messages.error(request, f'Erro ao enviar o e-mail: {str(e)}')
     else:
         messages.error(request, 'Apenas usuários de suporte podem iniciar atendimentos.')
 
     return redirect('historico_demanda', id_demanda=demanda.id)
-
-@login_required
-def reabrir_demanda(request, demanda_id):
-    demanda = get_object_or_404(Demanda, id=demanda_id)
-
-    if request.user.perfil.tipo == 'suporte':
-        # Verifica se a demanda está fechada
-        if demanda.status == 'Fechado':
-            demanda.status = 'Aberto'
-            demanda.realizador = None  # Remove o realizador ao reabrir
-            demanda.save()
-
-            messages.success(request, 'Demanda reaberta com sucesso!')
-        else:
-            messages.error(request, 'Apenas demandas fechadas podem ser reabertas.')
-    else:
-        messages.error(request, 'Apenas usuários de suporte podem reabrir demandas.')
-
-    return redirect('historico_demanda', id_demanda=demanda.id)
-
-
 
 def relatorio(request):
     # Pegando os filtros dos parâmetros da requisição
