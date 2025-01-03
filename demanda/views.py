@@ -256,6 +256,17 @@ def enviar_mensagem(request, demanda_id):
             except Exception as e:
                 messages.error(request, f'Erro ao enviar o e-mail: {str(e)}')
                 
+            
+                       
+            
+            
+            # Redireciona para a mesma página, mas usando o nome correto do argumento na URL
+            return redirect('historico_demanda', id_demanda=demanda.id)
+
+    # Se for uma requisição GET, apenas renderiza a página com a demanda
+    return render(request, 'historico_demanda.html', {'demanda': demanda})
+
+                
 
 
 
