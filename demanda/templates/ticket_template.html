@@ -93,9 +93,9 @@ Chamado {% endblock %} {% block content %}
       <h3>{{ demanda.titulo }}</h3>
       <!-- Título da demanda -->
       <p>
-        Ticket aberto via sistema pelo cliente {{ demanda.operador.get_full_name
-        }} em {{ demanda.data_criacao|date:"d/m/Y H:i" }}
+        Ticket aberto via sistema pelo cliente {{ demanda.operador.nome }} em {{ demanda.data_criacao|date:"d/m/Y H:i" }}
       </p>
+    
       <!-- Data da abertura e nome do solicitante -->
     </div>
 
@@ -124,8 +124,7 @@ Chamado {% endblock %} {% block content %}
       {% for mensagem in demanda.mensagens.all %}
       <div class="message">
         <p>
-          <strong>{{ mensagem.autor.nome }}</strong> enviou em {{
-          mensagem.data_envio|date:"d/m/Y H:i" }}
+          <strong>{{ mensagem.autor.nome }}</strong> enviou em {{mensagem.data_envio|date:"d/m/Y H:i" }}
         </p>
         <p>{{ mensagem.texto }}</p>
       </div>
