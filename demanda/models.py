@@ -104,7 +104,7 @@ class Demanda(models.Model):
     descricao = models.TextField()
     imagem = models.ImageField(upload_to='demandas/', null=True, blank=True)
     area = models.ForeignKey('Area', on_delete=models.CASCADE)
-    status = models.CharField(max_length=7, choices=STATUS_CHOICES, default='Aberto')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Aberto')
     data_criacao = models.DateTimeField(auto_now_add=True)
     operador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='demandas_abertas')
     realizador = models.ForeignKey(

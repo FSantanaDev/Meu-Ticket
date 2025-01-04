@@ -10,11 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.utils import timezone  # Para lidar com datas
 from .models import Area, Servico, Urgencia, Demanda,Mensagem, Usuario
-
 from django.http import HttpResponse
 from django.template.loader import get_template
 from io import BytesIO
-
 from django.template.loader import get_template
 from reportlab.lib.pagesizes import A4,letter
 from reportlab.pdfgen import canvas
@@ -29,6 +27,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 #import pandas as pd
 from django.utils.dateparse import parse_date
+from django.template.loader import render_to_string
+#from xhtml2pdf import pisa
+from urllib.parse import urlencode  # Import para construir query strings
+import os
+
+
+
+
+from datetime import datetime, timedelta
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+import pandas as pd
+from django.utils.dateparse import parse_date
+
 from django.template.loader import render_to_string
 #from xhtml2pdf import pisa
 from urllib.parse import urlencode  # Import para construir query strings
@@ -113,10 +126,7 @@ def filtrar_demandas(request):
     return render(request, 'filtros.html', {
         'demandas': queryset
     })
-  
-    
- 
-    
+        
 def cadastrar_nova_demanda(request):
     if request.method == 'POST':
         form = Nova_DemandaForm(request.POST, request.FILES)
@@ -135,15 +145,15 @@ def cadastrar_nova_demanda(request):
 
             # Enviar e-mail para o usuário
             try:
-                assunto = "Nova demanda cadastrada"
+                assunto = f"Nova demanda: {demanda.titulo} cadastrada"
                 mensagem = (
                     f"Olá, {request.user.nome}!\n\n"
-                    f"Você cadastrou uma nova demanda no sistema com o ID {demanda.id}.\n\n"
+                    f"Você cadastrou uma nova demanda no sistema com o Título {demanda.titulo} e ID {demanda.id}.\n\n"
                     "Detalhes da demanda:\n"
                     f"Título: {demanda.titulo}\n"
                     f"Área: {demanda.area}\n"
                     f"Status: {demanda.status}\n\n"
-                    "Obrigado por utilizar o sistema MeuTicket!\n"
+                    "Obrigado por utilizar nosso sistema!\n"
                 )
                 remetente = 'bragasan34@gmail.com'
                 destinatario = [request.user.email]
@@ -174,6 +184,34 @@ def historico_demanda(request, id_demanda):
     
     # Renderiza o template ticket_template.html com os dados da demanda
     return render(request, 'ticket_template.html', {'demanda': demanda})
+
+
+
+
+# def enviar_mensagem(request, demanda_id):
+#     # Busca a demanda associada ao ID
+#     demanda = get_object_or_404(Demanda, id=demanda_id)
+
+#     if request.method == 'POST':
+#         # Obtém o texto da mensagem do formulário
+#         texto_mensagem = request.POST.get('mensagem')
+
+#         # Verifica se o campo da mensagem não está vazio
+#         if texto_mensagem:
+#             # Cria uma nova instância de Mensagem e salva no banco de dados
+#             nova_mensagem = Mensagem(
+#                 demanda=demanda,
+#                 autor=request.user,  # Quem está logado e enviando a mensagem
+#                 texto=texto_mensagem,
+#                 data_envio=timezone.now()
+#             )
+#             nova_mensagem.save()
+
+#             # Redireciona para a mesma página, mas usando o nome correto do argumento na URL
+#             return redirect('historico_demanda', id_demanda=demanda.id)
+
+#     # Se for uma requisição GET, apenas renderiza a página com a demanda
+#     return render(request, 'historico_demanda.html', {'demanda': demanda})
 
 
 
@@ -228,6 +266,14 @@ def enviar_mensagem(request, demanda_id):
     # Se for uma requisição GET, apenas renderiza a página com a demanda
     return render(request, 'historico_demanda.html', {'demanda': demanda})
 
+                
+
+
+
+
+
+
+
 
 
 @login_required
@@ -251,7 +297,7 @@ def fechar_demanda(request, demanda_id):
 
 
 
-
+logger = logging.getLogger(__name__)
 
 def dashboard_suporte(request):
     if request.user.perfil.tipo == 'suporte':
@@ -262,8 +308,9 @@ def dashboard_suporte(request):
     return redirect('home')
 
 
-@login_required
-def iniciar_atendimento(request, demanda_id):
+
+# @login_required
+# def iniciar_atendimento(request, demanda_id):
     demanda = get_object_or_404(Demanda, id=demanda_id)
 
     if request.user.perfil.tipo == 'suporte':
@@ -296,6 +343,7 @@ def iniciar_atendimento(request, demanda_id):
         messages.error(request, 'Apenas usuários de suporte podem iniciar atendimentos.')
 
     return redirect('historico_demanda', id_demanda=demanda.id)
+
 
 
 
@@ -424,7 +472,7 @@ def relatorio_preview_view(request):
     else:
         # Paginação para preview
         page_number = request.GET.get('page', 1)
-        paginator = Paginator(demandas, 33)  # 30 registros por página
+        paginator = Paginator(demandas, 30)  # 30 registros por página
         try:
             page_obj = paginator.page(page_number)
         except PageNotAnInteger:
@@ -746,6 +794,8 @@ def gerar_pdf(request):
     response = HttpResponse(buffer, content_type="application/pdf")
     response["Content-Disposition"] = 'inline; filename="relatorio_demandas.pdf"'
     return response
+
+
 
 
 
