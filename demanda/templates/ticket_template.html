@@ -1,9 +1,12 @@
-<!-- ticket_template.html -->
-{% extends 'base.html' %} {% load static %} {% block titulo %} Histórico do
-Chamado {% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
 
+{% block titulo %}Histórico do Chamado{% endblock %}
+
+{% block content %}
 <link rel="stylesheet" href="{% static 'css/ticket_template.css' %}" />
 
+<!-- Exibe mensagens de alerta, se houver -->
 {% if messages %}
 <div class="messages">
   {% for message in messages %}
@@ -16,116 +19,90 @@ Chamado {% endblock %} {% block content %}
 
 <div class="titulo-container">
   <h2>Histórico do Chamado</h2>
-  <!-- Título centralizado -->
 </div>
 
 <div class="container">
-  <!-- Sidebar esquerda com informações do ticket -->
+  <!-- Sidebar com informações do ticket -->
   <div class="sidebar">
     <h2>Ticket {{ demanda.id }}</h2>
-    <!-- Número da demanda -->
-
     <div class="ticket-info">
-      <label>Solicitante</label>
+      <label>Solicitante:</label>
       <p>{{ demanda.operador.nome }}</p>
-      <!-- Nome do operador -->
     </div>
-
     <div class="ticket-info">
-      <label>Área Solicitante</label>
+      <label>Área Solicitante:</label>
       <p>{{ demanda.operador.area }}</p>
-      <!-- Área do operador -->
     </div>
-
     <div class="ticket-info">
-      <label>Responsável</label>
+      <label>Responsável:</label>
       {% if demanda.realizador %}
       <p>{{ demanda.realizador.nome }}</p>
-      <!-- Nome do realizador -->
       <p>{{ demanda.realizador.area }}</p>
-      <!-- Área do realizador -->
       {% else %}
-      <p>Ainda não atribuído</p>
       <p>Ainda não atribuído</p>
       {% endif %}
     </div>
-
     <div class="ticket-info">
-      <label>Status</label>
+      <label>Status:</label>
       <p>{{ demanda.get_status_display }}</p>
-      <!-- Status da demanda -->
     </div>
-
     <div class="ticket-info">
-      <label>Serviço</label>
+      <label>Serviço:</label>
       <p>{{ demanda.servico.descricao }}</p>
-      <!-- Serviço -->
     </div>
-
     <div class="ticket-info">
-      <label>Urgência</label>
+      <label>Urgência:</label>
       <p>{{ demanda.urgencia }}</p>
-      <!-- Urgência -->
     </div>
 
-    <!-- Ações para o usuário de suporte -->
-    {% if user.perfil.tipo == 'suporte' %} {% if demanda.status == 'Aberto' %}
-    <form method="post" action="{% url 'iniciar_atendimento' demanda.id %}">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-iniciar">Iniciar Atendimento</button>
-    </form>
-    {% endif %} {% if demanda.status == 'Em Atendimento' %}
-    <form method="post" action="{% url 'fechar_demanda' demanda.id %}">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-encerrar">Encerrar Demanda</button>
-    </form>
-    {% endif %} {% if demanda.status == 'Fechado' %}
-    <form method="post" action="{% url 'reabrir_demanda' demanda.id %}">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-reabrir">Reabrir Demanda</button>
-    </form>
-    {% endif %} {% endif %}
+    <!-- Botões de ação -->
+    {% if user.perfil.tipo == 'suporte' %}
+      {% if demanda.status == 'Aberto' %}
+      <form method="post" action="{% url 'iniciar_atendimento' demanda.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-iniciar">Iniciar Atendimento</button>
+      </form>
+      {% elif demanda.status == 'Em Atendimento' %}
+      <form method="post" action="{% url 'fechar_demanda' demanda.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-encerrar">Encerrar Demanda</button>
+      </form>
+      {% elif demanda.status == 'Fechado' %}
+      <form method="post" action="{% url 'reabrir_demanda' demanda.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-reabrir">Reabrir Demanda</button>
+      </form>
+      {% endif %}
+    {% endif %}
   </div>
 
   <!-- Conteúdo principal -->
   <div class="content">
     <div class="header">
       <h3>{{ demanda.titulo }}</h3>
-      <!-- Título da demanda -->
-      <p>
-        Ticket aberto via sistema pelo cliente {{ demanda.operador.nome }} em {{ demanda.data_criacao|date:"d/m/Y H:i" }}
-      </p>
-    
-      <!-- Data da abertura e nome do solicitante -->
+      <p>Aberto por {{ demanda.operador.nome }} em {{ demanda.data_criacao|date:"d/m/Y H:i" }}</p>
     </div>
 
     <div class="description">
-      <label>Descrição</label>
+      <label>Descrição:</label>
       <textarea rows="5" disabled>{{ demanda.descricao }}</textarea>
-      <!-- Descrição da demanda -->
     </div>
 
-    <!-- Campo de mensagem para resposta -->
+    <!-- Enviar mensagem -->
     <div class="message-box">
       <form method="POST" action="{% url 'enviar_mensagem' demanda.id %}">
         {% csrf_token %}
-        <label>Mensagem</label>
-        <textarea
-          name="mensagem"
-          rows="3"
-          placeholder="Digite sua mensagem"
-        ></textarea>
-        <button type="submit" class="send-btn">ENVIAR MENSAGEM</button>
+        <label>Mensagem:</label>
+        <textarea name="mensagem" rows="3" placeholder="Digite sua mensagem"></textarea>
+        <button type="submit" class="send-btn">Enviar Mensagem</button>
       </form>
     </div>
 
-    <!-- Conversas entre cliente e atendente -->
+    <!-- Histórico de mensagens -->
     <div class="conversation">
       {% for mensagem in demanda.mensagens.all %}
       <div class="message">
-        <p>
-          <strong>{{ mensagem.autor.nome }}</strong> enviou em {{mensagem.data_envio|date:"d/m/Y H:i" }}
-        </p>
+        <p><strong>{{ mensagem.autor.nome }}</strong> enviou em {{ mensagem.data_envio|date:"d/m/Y H:i" }}</p>
         <p>{{ mensagem.texto }}</p>
       </div>
       {% empty %}
@@ -136,17 +113,10 @@ Chamado {% endblock %} {% block content %}
 </div>
 
 <script>
-  // Esconder as mensagens após 3 segundos
+  // Oculta mensagens após 3 segundos
   document.addEventListener('DOMContentLoaded', function () {
     const messages = document.querySelectorAll('.alert');
-
-    setTimeout(function () {
-      const messages = document.querySelectorAll('.alert');
-      messages.forEach(function (message) {
-        message.style.display = 'none';
-      });
-    }, 2000);
+    setTimeout(() => messages.forEach(msg => msg.style.display = 'none'), 3000);
   });
 </script>
-
 {% endblock %}

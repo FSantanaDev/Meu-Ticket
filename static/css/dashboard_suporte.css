@@ -7,16 +7,17 @@
     border-radius: 8px; /* Bordas arredondadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     border: 1px solid #c9c6c6; /* Borda suave */
-    width: 100%;
-    margin-top: 10px;
-    height: 750px;
-    overflow-y: auto;  /* Adiciona a barra de rolagem vertical */
+    width: 90%; /* Ajusta largura em dispositivos menores */
+    margin-top: 20px;
+    height: auto;
 }
 
 /* Estilo do título */
 h2 {
     text-align: center; /* Centraliza o título */
     color: #333; /* Cor do texto */
+    font-size: 1.8rem; /* Ajusta o tamanho do texto */
+    margin-bottom: 20px; /* Espaçamento inferior */
 }
 
 /* Estilo da lista de demandas */
@@ -33,6 +34,9 @@ h2 {
     border-radius: 4px; /* Bordas arredondadas */
     background-color: #ffffff; /* Cor de fundo branca */
     transition: background-color 0.3s; /* Transição suave */
+    display: flex;
+    flex-direction: column; /* Alinha texto e link em colunas */
+    gap: 10px; /* Espaçamento entre texto e link */
 }
 
 /* Efeito de hover sobre os itens */
@@ -43,13 +47,43 @@ h2 {
 /* Estilo do link de detalhes */
 .detalhes-link {
     display: inline-block; /* Permite definir margens */
-    margin-top: 10px; /* Espaçamento acima do link */
     text-decoration: none; /* Remove sublinhado */
     color: #007bff; /* Cor do link */
     font-weight: bold; /* Texto em negrito */
+    align-self: flex-start; /* Alinha o link à esquerda */
 }
 
 /* Efeito de hover sobre o link de detalhes */
 .detalhes-link:hover {
     text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+/* Regras de responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Reduz o espaçamento interno */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Reduz o tamanho do título */
+    }
+
+    .demanda-item {
+        flex-direction: column; /* Mantém a organização em colunas */
+        gap: 5px; /* Reduz o espaçamento entre elementos */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px; /* Reduz ainda mais o espaçamento interno */
+    }
+
+    h2 {
+        font-size: 1.2rem; /* Ajusta tamanho do título */
+    }
+
+    .detalhes-link {
+        font-size: 0.9rem; /* Reduz o tamanho da fonte do link */
+    }
 }

@@ -4,7 +4,7 @@
 {% block titulo %}Dashboard de Suporte{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/dashboard_suporte.css' %}"> <!-- Link para o CSS separado -->
+<link rel="stylesheet" href="{% static 'css/dashboard_suporte.css' %}"> <!-- Link para o CSS atualizado -->
 
 <div class="container">
     <h2>Demandas Abertas</h2>
@@ -14,7 +14,7 @@
             {% for demanda in demandas_abertas %}
                 <li class="demanda-item">
                     <strong>{{ demanda.titulo }}</strong> - {{ demanda.descricao }}
-                    <a class="detalhes-link" href="{% url 'historico_demanda' demanda.id %}"> - Ver Detalhes</a>
+                    <a class="detalhes-link" href="{% url 'historico_demanda' demanda.id %}">Ver Detalhes</a>
                 </li>
             {% endfor %}
         </ul>

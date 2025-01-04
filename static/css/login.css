@@ -1,113 +1,127 @@
-/* Define o estilo básico da página */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh; /* Altura de 100% da tela */
+/* Define altura e largura da página */
+html, body {
+  height: 100%; /* 100% do viewport */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Remove barra horizontal */
+  overflow-y: auto; /* Exibe barra de rolagem vertical quando necessário */
+  box-sizing: border-box; /* Inclui bordas no cálculo de largura/altura */
 }
 
-/* Container principal da tela de login */
-.login-container {
-    background-color: white;
-    padding: 40px; /* Espaçamento interno */
-    border-radius: 10px; /* Borda arredondada */
-    box-shadow: 0 10px 48px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
-    width: 350px; /* Largura fixa */
-    text-align: center; /* Centraliza os itens no centro */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/static/img/MeuTicket.png') no-repeat center center fixed;
+  filter: blur(0.5px);
+  opacity: 0.2; /* Transparência */
+  z-index: -1; /* Pseudo-elemento fica atrás do conteúdo */
 }
 
-/* Logo da empresa */
-.logo img {
-    width: 200px; /* Tamanho da imagem logo */
-    margin-bottom: 20px; /* Espaço entre logo e formulário */
+/* Estilos gerais */
+.welcome {
+  display: flex;
+  align-items: center;
+  background-color: rgb(38, 54, 148);
+  color: rgb(255, 255, 255);
+  gap: 10px;
+  padding: 5px;
 }
 
-/* Estilo dos grupos de input */
-.input-group {
-    margin-bottom: 20px; /* Espaçamento entre os campos */
-    text-align: left; /* Alinha as labels à esquerda */
+.logo {
+  height: 30px;
+  margin-left: 5px;
+  border-radius: 5px;
 }
 
-/* Estilo das labels */
-.input-group label {
-    display: block;
-    font-size: 14px; /* Tamanho da fonte */
-    color: #333; /* Cor da fonte */
-    margin-bottom: 5px; /* Espaçamento entre label e input */
+.navbar {
+  background-color: #d2dde9;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  border: 1px solid black;
 }
 
-/* Estilo dos campos de input */
-.input-group input {
-    width: 100%; /* Largura completa do container */
-    padding: 10px; /* Espaçamento interno do campo */
-    border: 1px solid #ccc; /* Borda padrão */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 14px; /* Tamanho do texto */
+.nav-icons {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: flex-start;
+  padding: 0;
+  width: 100%;
 }
 
-/* Estilo do link 'Esqueci minha senha' */
-.esqueci-senha {
-    margin-bottom: 20px; /* Espaçamento abaixo do link */
-    text-align: right; /* Alinhado à direita */
+.nav-icons li {
+  margin: 5px;
+  text-align: center;
+  width: 100px;
 }
 
-/* Estilo do link */
-.esqueci-senha a {
-    font-size: 12px; /* Tamanho da fonte do link */
-    color: #007bff; /* Cor do link (azul) */
-    text-decoration: none; /* Remove o sublinhado */
+.nav-icons a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.esqueci-senha a:hover {
-    text-decoration: underline; /* Sublinhado ao passar o mouse */
+.nav-icons img {
+  height: 40px;
+  width: 40px;
+  border: 1px solid rgb(156, 152, 152);
+  border-radius: 5px;
 }
 
-/* Estilo do grupo de checkbox */
-.checkbox-group {
-    margin-bottom: 20px; /* Espaçamento abaixo do checkbox */
-    text-align: left; /* Alinha à esquerda */
-    font-size: 14px;
+.nav-icons span {
+  margin-top: 5px;
+  text-align: center;
 }
 
-/* Estilo dos botões */
-.button-group {
-    display: flex;
-    justify-content: space-between; /* Deixa os botões alinhados lado a lado */
-    margin-top: 20px;
+.nav-exit {
+  margin-left: auto; /* Empurra o botão "Sair" para a direita */
 }
 
-/* Estilo do botão 'Entrar' */
-.btn-entrar {
-    background-color: #007bff; /* Cor de fundo do botão (azul) */
-    color: white; /* Cor do texto */
-    padding: 10px 20px; /* Espaçamento interno */
-    border: none; /* Remove borda padrão */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho do texto */
-    cursor: pointer; /* Muda o cursor ao passar no botão */
-    width: 48%; /* Largura de 48% para os dois botões caberem no espaço */
+/* Adiciona responsividade com media queries */
+@media (max-width: 768px) {
+  .welcome {
+    flex-direction: column; /* Alinha elementos verticalmente */
+    text-align: center;
+  }
+
+  .logo {
+    height: 50px; /* Ajusta tamanho do logo */
+  }
+
+  .navbar {
+    flex-direction: column; /* Navbar ocupa 100% da largura */
+    align-items: center;
+  }
+
+  .nav-icons {
+    justify-content: center; /* Centraliza os ícones */
+  }
+
+  .nav-icons li {
+    width: 80px; /* Reduz a largura dos botões */
+  }
+
+  .nav-icons img {
+    height: 35px;
+    width: 35px; /* Ajusta os ícones para telas menores */
+  }
 }
 
-.btn-entrar:hover {
-    background-color: #0056b3; /* Cor ao passar o mouse */
-}
+@media (max-width: 480px) {
+  .nav-icons li {
+    width: 100%; /* Ícones ocupam toda a largura */
+    margin: 5px 0;
+  }
 
-/* Estilo do botão 'Cancelar' */
-.btn-cancelar {
-    background-color: #dc3545; /* Cor de fundo vermelha para o botão 'Cancelar' */
-    color: white; /* Cor do texto */
-    padding: 10px 20px; /* Espaçamento interno */
-    border: none; /* Remove borda padrão */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho do texto */
-    cursor: pointer; /* Muda o cursor ao passar no botão */
-    width: 48%; /* Largura de 48% para os dois botões caberem no espaço */
-}
-
-.btn-cancelar:hover {
-    background-color: #c82333; /* Cor ao passar o mouse */
+  .nav-icons img {
+    height: 30px;
+    width: 30px;
+  }
 }
